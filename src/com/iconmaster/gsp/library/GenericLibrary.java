@@ -29,7 +29,7 @@ public class GenericLibrary extends SourcePackage {
 		//add fields:
 		Field f;
 		
-		f = Field.libraryField("yourField", TypeDef.INT);
+		f = Field.libraryField("myField", TypeDef.INT);
 		this.addField(f);
 		
 		//add iterators:
