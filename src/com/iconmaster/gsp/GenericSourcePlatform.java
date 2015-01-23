@@ -38,13 +38,13 @@ public class GenericSourcePlatform extends Platform {
 	}
 
 	@Override
-	public String assemble(SourcePackage pkg) {
+	public Object assemble(SourcePackage pkg) {
 		return null; //return an object that represents the compiler output.
 	}
 
 	@Override
-	public void run(SourcePackage pkg) {
-		return; //interpret SIL here.
+	public Object run(SourcePackage pkg) {
+		return null; //interpret SIL here.
 	}
 	
 }
