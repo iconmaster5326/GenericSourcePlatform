@@ -22,8 +22,7 @@ public class GenericSourcePlatform extends Platform {
 		
 		//load code transformers:
 		
-		//transforms.add(CompileUtils.iteratorReplacer); //if you want all iterators replaced with more generic for loops
-		//transforms.add(CompileUtils.forEachReplacer); //if you want all SIL for-eaches replaced with for-ranges
+		//transforms.add(CompileUtils.iteratorReplacer); //if you want all non-system iterators inlined
 		//transforms.add(CompileUtils.gotoReplacer); //if you want ALL SIL branches/loops replaced with SIL GOTOs
 	}
 
