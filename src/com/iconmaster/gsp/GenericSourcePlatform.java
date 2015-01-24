@@ -14,6 +14,8 @@ import com.iconmaster.source.prototype.SourcePackage;
 public class GenericSourcePlatform extends Platform {
 	
 	public GenericSourcePlatform() {
+		this.name = "GenericSourcePlatform"; //Your name is important!
+		
 		//load all the default library packages:
 		this.registerLibrary(new LibraryCore());
 		
