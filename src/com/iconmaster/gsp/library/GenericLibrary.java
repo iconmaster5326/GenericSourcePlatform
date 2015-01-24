@@ -20,21 +20,19 @@ public class GenericLibrary extends SourcePackage {
 		//add new data types:
 		this.addType(myType);
 		
-		//add functions:
 		Function fn;
+		Field f;
+		Iterator iter;
 		
-		fn = Function.libraryFunction("myFunc", new String[] {"arg1","arg2","arg3"}, new TypeDef[] {TypeDef.UNKNOWN,TypeDef.UNKNOWN,TypeDef.UNKNOWN}, TypeDef.UNKNOWN);
+		//add functions:
+		fn = Function.libraryFunction("myFunc", new String[] {"arg1","arg2","arg3"}, new Object[] {TypeDef.UNKNOWN,TypeDef.UNKNOWN,TypeDef.UNKNOWN}, TypeDef.UNKNOWN);
 		this.addFunction(fn);
 		
 		//add fields:
-		Field f;
-		
 		f = Field.libraryField("myField", TypeDef.INT);
 		this.addField(f);
 		
 		//add iterators:
-		Iterator iter;
-		
 		iter = Iterator.libraryIterator("myIter", new String[] {"lst"}, new Object[] {TypeDef.UNKNOWN}, new Object[] {TypeDef.UNKNOWN});
 		this.addIterator(iter);
 	}

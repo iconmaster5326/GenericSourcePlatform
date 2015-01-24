@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class LibraryCore extends SourcePackage {
 
 	public LibraryCore() {
-		this.name = "core"; //the name of your library. The one named "core" doesn't need explicitly imported.
+		this.name = "core";
 		
 		//Add all the base data types in core:
 		TypeDef.addBaseTypes(this);
@@ -25,19 +25,64 @@ public class LibraryCore extends SourcePackage {
 		DataType ltdt = new DataType(TypeDef.LIST); //this is list[T]
 		TypeDef ltt = new ParamTypeDef("T", 0); //this is T
 		ltdt.params = new DataType[] {new DataType(ltt)};
+		DataType atdt = new DataType(TypeDef.ARRAY); //this is array[T]
+		ltdt.params = new DataType[] {new DataType(ltt)};
 		
-		//add functions:
 		Function fn;
+		Field f;
+		Iterator iter;
 		
-		fn = Function.libraryFunction("print", new String[] {"item"}, new TypeDef[] {TypeDef.UNKNOWN}, null);
+		fn = Function.libraryFunction("print", new String[] {"item"}, new Object[] {TypeDef.UNKNOWN}, null);
 		this.addFunction(fn);
 		
-		//add iterators:
-		Iterator iter;
-
-		iter = Iterator.libraryIterator("list.pairs", new String[] {"lst"}, new Object[] {ltdt}, new Object[] {TypeDef.INT, ltt});
-		iter.rawParams = new ArrayList<>();
-		iter.rawParams.add(new Field("T"));
+		fn = Function.libraryFunction("input", new String[] {}, new Object[] {}, TypeDef.STRING);
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("error", new String[] {}, new Object[] {}, null);
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("error", new String[] {"msg"}, new Object[] {TypeDef.UNKNOWN}, null);
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("ifte", new String[] {"cond","then","else"}, new Object[] {TypeDef.BOOLEAN,ltt,ltt}, ltt);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("typeof", new String[] {"item"}, new Object[] {TypeDef.UNKNOWN}, null);
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("sizeof", new String[] {"item"}, new Object[] {TypeDef.UNKNOWN}, null);
+		this.addFunction(fn);
+		
+		DataType arrayInt = new DataType(TypeDef.ARRAY);
+		arrayInt.params = new DataType[] {new DataType(TypeDef.INT)};
+		
+		DataType arrayReal = new DataType(TypeDef.ARRAY);
+		arrayInt.params = new DataType[] {new DataType(TypeDef.REAL)};
+		
+		fn = Function.libraryFunction("range", new String[] {"begin","end"}, new Object[] {TypeDef.INT,TypeDef.INT}, arrayInt);
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("range", new String[] {"begin","end","step"}, new Object[] {TypeDef.INT,TypeDef.INT,TypeDef.INT}, arrayInt);
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("range", new String[] {"begin","end"}, new Object[] {TypeDef.REAL,TypeDef.REAL}, arrayReal);
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("range", new String[] {"begin","end","step"}, new Object[] {TypeDef.REAL,TypeDef.REAL,TypeDef.REAL}, arrayReal);
+		this.addFunction(fn);
+		
+		iter = Iterator.libraryIterator("range", new String[] {"begin","end"}, new Object[] {TypeDef.INT,TypeDef.INT}, new Object[] {TypeDef.INT});
+		this.addIterator(iter);
+		
+		iter = Iterator.libraryIterator("range", new String[] {"begin","end","step"}, new Object[] {TypeDef.INT,TypeDef.INT,TypeDef.INT}, new Object[] {TypeDef.INT});
+		this.addIterator(iter);
+		
+		iter = Iterator.libraryIterator("range", new String[] {"begin","end"}, new Object[] {TypeDef.REAL,TypeDef.REAL}, new Object[] {TypeDef.REAL});
+		this.addIterator(iter);
+		
+		iter = Iterator.libraryIterator("range", new String[] {"begin","end","step"}, new Object[] {TypeDef.REAL,TypeDef.REAL,TypeDef.REAL}, new Object[] {TypeDef.REAL});
 		this.addIterator(iter);
 	}
 }
