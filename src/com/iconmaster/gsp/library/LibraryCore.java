@@ -14,6 +14,11 @@ import java.util.ArrayList;
  * @author iconmaster
  */
 public class LibraryCore extends SourcePackage {
+	
+	public static TypeDef[] INT_TYPES = new TypeDef[] {TypeDef.INT8, TypeDef.INT16, TypeDef.INT32, TypeDef.INT64};
+	public static TypeDef[] REAL_TYPES = new TypeDef[] {TypeDef.REAL32, TypeDef.REAL64};
+	
+	public static TypeDef[] MATH_TYPES = new TypeDef[] {TypeDef.INT8, TypeDef.INT16, TypeDef.INT32, TypeDef.INT64, TypeDef.REAL32, TypeDef.REAL64};
 
 	public LibraryCore() {
 		this.name = "core";
@@ -55,34 +60,21 @@ public class LibraryCore extends SourcePackage {
 		fn = Function.libraryFunction("sizeof", new String[] {"item"}, new Object[] {TypeDef.UNKNOWN}, null);
 		this.addFunction(fn);
 		
-		DataType arrayInt = new DataType(TypeDef.ARRAY);
-		arrayInt.params = new DataType[] {new DataType(TypeDef.INT)};
+		for (TypeDef type : MATH_TYPES) {
+			DataType array = new DataType(TypeDef.ARRAY);
+			array.params = new DataType[] {new DataType(type)};
+			
+			fn = Function.libraryFunction("range", new String[] {"begin","end"}, new Object[] {type,type}, array);
+			this.addFunction(fn);
+			
+			fn = Function.libraryFunction("range", new String[] {"begin","end","step"}, new Object[] {type,type,type}, array);
+			this.addFunction(fn);
+			
+			iter = Iterator.libraryIterator("range", new String[] {"begin","end"}, new Object[] {type,type}, new Object[] {type});
+			this.addIterator(iter);
 		
-		DataType arrayReal = new DataType(TypeDef.ARRAY);
-		arrayInt.params = new DataType[] {new DataType(TypeDef.REAL)};
-		
-		fn = Function.libraryFunction("range", new String[] {"begin","end"}, new Object[] {TypeDef.INT,TypeDef.INT}, arrayInt);
-		this.addFunction(fn);
-		
-		fn = Function.libraryFunction("range", new String[] {"begin","end","step"}, new Object[] {TypeDef.INT,TypeDef.INT,TypeDef.INT}, arrayInt);
-		this.addFunction(fn);
-		
-		fn = Function.libraryFunction("range", new String[] {"begin","end"}, new Object[] {TypeDef.REAL,TypeDef.REAL}, arrayReal);
-		this.addFunction(fn);
-		
-		fn = Function.libraryFunction("range", new String[] {"begin","end","step"}, new Object[] {TypeDef.REAL,TypeDef.REAL,TypeDef.REAL}, arrayReal);
-		this.addFunction(fn);
-		
-		iter = Iterator.libraryIterator("range", new String[] {"begin","end"}, new Object[] {TypeDef.INT,TypeDef.INT}, new Object[] {TypeDef.INT});
-		this.addIterator(iter);
-		
-		iter = Iterator.libraryIterator("range", new String[] {"begin","end","step"}, new Object[] {TypeDef.INT,TypeDef.INT,TypeDef.INT}, new Object[] {TypeDef.INT});
-		this.addIterator(iter);
-		
-		iter = Iterator.libraryIterator("range", new String[] {"begin","end"}, new Object[] {TypeDef.REAL,TypeDef.REAL}, new Object[] {TypeDef.REAL});
-		this.addIterator(iter);
-		
-		iter = Iterator.libraryIterator("range", new String[] {"begin","end","step"}, new Object[] {TypeDef.REAL,TypeDef.REAL,TypeDef.REAL}, new Object[] {TypeDef.REAL});
-		this.addIterator(iter);
+			iter = Iterator.libraryIterator("range", new String[] {"begin","end","step"}, new Object[] {type,type,type}, new Object[] {type});
+			this.addIterator(iter);
+		}
 	}
 }
