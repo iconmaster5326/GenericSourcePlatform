@@ -103,7 +103,7 @@ public class LibraryCore extends SourcePackage {
 		for (TypeDef type1 : MATH_TYPES_EXT) {
 			for (TypeDef type2 : MATH_TYPES_EXT) {
 				if (type1!=type2) {
-					fn = Function.libraryFunction(type1.name+"._cast", new String[] {"from","to"}, new Object[] {type1,type2}, type2);
+					fn = Function.libraryFunction(type2.name+"._cast", new String[] {"from"}, new Object[] {type1}, type2);
 					this.addFunction(fn);
 				}
 			}
@@ -133,6 +133,9 @@ public class LibraryCore extends SourcePackage {
 		iter = Iterator.libraryIterator("array._iter", new String[] {"a"}, new Object[] {atdt}, new Object[] {att});
 		this.addIterator(iter);
 		
+		fn = Function.libraryFunction("array._cast", new String[] {"a"}, new Object[] {TypeDef.LIST}, TypeDef.ARRAY);
+		this.addFunction(fn);
+		
 		//list functions
 		DataType ltdt = new DataType(TypeDef.LIST); //this is list[T]
 		TypeDef ltt = new ParamTypeDef("T", 0); //this is T
@@ -148,5 +151,8 @@ public class LibraryCore extends SourcePackage {
 		
 		iter = Iterator.libraryIterator("list._iter", new String[] {"a"}, new Object[] {ltdt}, new Object[] {ltt});
 		this.addIterator(iter);
+		
+		fn = Function.libraryFunction("list._cast", new String[] {"a"}, new Object[] {TypeDef.ARRAY}, TypeDef.LIST);
+		this.addFunction(fn);
 	}
 }
