@@ -2,6 +2,7 @@ package com.iconmaster.gsp;
 
 import com.iconmaster.gsp.library.GenericLibrary;
 import com.iconmaster.gsp.library.LibraryCore;
+import com.iconmaster.source.assemble.AssembledOutput;
 import com.iconmaster.source.link.Platform;
 import com.iconmaster.source.link.platform.PlatformLoader.LoadedPlatform;
 import com.iconmaster.source.prototype.SourcePackage;
@@ -39,8 +40,8 @@ public class GenericSourcePlatform extends Platform {
 	}
 
 	@Override
-	public Object assemble(SourcePackage pkg) {
-		return null; //return an object that represents the compiler output.
+	public AssembledOutput assemble(SourcePackage pkg) {
+		return null; //return a new GenericOutput that represents the compiler output.
 	}
 
 	@Override
