@@ -30,13 +30,6 @@ public class LibraryCore extends SourcePackage {
 		//Add all the base data types in core:
 		TypeDef.addBaseTypes(this);
 		
-		//define list parameter types here, becuse it's kind of complex:
-		DataType ltdt = new DataType(TypeDef.LIST); //this is list[T]
-		TypeDef ltt = new ParamTypeDef("T", 0); //this is T
-		ltdt.params = new DataType[] {new DataType(ltt)};
-		DataType atdt = new DataType(TypeDef.ARRAY); //this is array[T]
-		ltdt.params = new DataType[] {new DataType(ltt)};
-		
 		Function fn;
 		Field f;
 		Iterator iter;
@@ -53,7 +46,8 @@ public class LibraryCore extends SourcePackage {
 		fn = Function.libraryFunction("error", new String[] {"msg"}, new Object[] {TypeDef.UNKNOWN}, null);
 		this.addFunction(fn);
 		
-		fn = Function.libraryFunction("ifte", new String[] {"cond","then","else"}, new Object[] {TypeDef.BOOLEAN,ltt,ltt}, ltt);
+		TypeDef iftet = new ParamTypeDef("T", 0);
+		fn = Function.libraryFunction("ifte", new String[] {"cond","then","else"}, new Object[] {TypeDef.BOOLEAN,iftet,iftet}, iftet);
 		fn.rawParams = new ArrayList<>();
 		fn.rawParams.add(new Field("T"));
 		this.addFunction(fn);
@@ -81,6 +75,7 @@ public class LibraryCore extends SourcePackage {
 			this.addIterator(iter);
 		}
 		
+		//overloads
 		for (TypeDef type : MATH_TYPES) {
 			for (String op : MATH_OPS) {
 				fn = Function.libraryFunction(type.name+"."+op, new String[] {"a1","a2"}, new Object[] {type,type}, type);
@@ -113,5 +108,45 @@ public class LibraryCore extends SourcePackage {
 				}
 			}
 		}
+		
+		//int/real type functions
+		for (TypeDef type : MATH_TYPES) {
+			f = Field.libraryField(type.name+".minValue", type);
+			this.addField(f);
+			f = Field.libraryField(type.name+".maxValue", type);
+			this.addField(f);
+		}
+		
+		//array functions
+		TypeDef att = new ParamTypeDef("T", 0); //this is T
+		DataType atdt = new DataType(TypeDef.ARRAY); //this is array[T]
+		atdt.params = new DataType[] {new DataType(att)};
+		
+		for (TypeDef type : INT_TYPES) {
+			fn = Function.libraryFunction("array._getindex", new String[] {"a","i"}, new Object[] {atdt,type}, att);
+			this.addFunction(fn);
+
+			fn = Function.libraryFunction("array._setindex", new String[] {"a","v","i"}, new Object[] {atdt,att,type}, null);
+			this.addFunction(fn);
+		}
+		
+		iter = Iterator.libraryIterator("array._iter", new String[] {"a"}, new Object[] {atdt}, new Object[] {att});
+		this.addIterator(iter);
+		
+		//list functions
+		DataType ltdt = new DataType(TypeDef.LIST); //this is list[T]
+		TypeDef ltt = new ParamTypeDef("T", 0); //this is T
+		ltdt.params = new DataType[] {new DataType(ltt)};
+		
+		for (TypeDef type : INT_TYPES) {
+			fn = Function.libraryFunction("list._getindex", new String[] {"a","i"}, new Object[] {ltdt,type}, att);
+			this.addFunction(fn);
+
+			fn = Function.libraryFunction("list._setindex", new String[] {"a","v","i"}, new Object[] {ltdt,ltt,type}, null);
+			this.addFunction(fn);
+		}
+		
+		iter = Iterator.libraryIterator("list._iter", new String[] {"a"}, new Object[] {ltdt}, new Object[] {ltt});
+		this.addIterator(iter);
 	}
 }
