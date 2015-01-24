@@ -154,5 +154,25 @@ public class LibraryCore extends SourcePackage {
 		
 		fn = Function.libraryFunction("list._cast", new String[] {"a"}, new Object[] {TypeDef.ARRAY}, TypeDef.LIST);
 		this.addFunction(fn);
+		
+		//string functions
+		for (TypeDef type : INT_TYPES) {
+			fn = Function.libraryFunction("string._getindex", new String[] {"s","i"}, new Object[] {TypeDef.STRING,type}, TypeDef.CHAR);
+			this.addFunction(fn);
+
+			fn = Function.libraryFunction("string._setindex", new String[] {"s","v","i"}, new Object[] {TypeDef.STRING,TypeDef.CHAR,type}, null);
+			this.addFunction(fn);
+		}
+		
+		iter = Iterator.libraryIterator("string._iter", new String[] {"s"}, new Object[] {TypeDef.STRING}, new Object[] {TypeDef.CHAR});
+		this.addIterator(iter);
+		
+		for (TypeDef type : MATH_TYPES_EXT) {
+			fn = Function.libraryFunction("string._cast", new String[] {"s"}, new Object[] {type}, TypeDef.STRING);
+			this.addFunction(fn);
+			
+			fn = Function.libraryFunction(type.name+"._cast", new String[] {"s"}, new Object[] {TypeDef.STRING}, type);
+			this.addFunction(fn);
+		}
 	}
 }
