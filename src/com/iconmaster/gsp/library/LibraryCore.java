@@ -17,9 +17,13 @@ public class LibraryCore extends SourcePackage {
 	
 	public static TypeDef[] INT_TYPES = new TypeDef[] {TypeDef.INT8, TypeDef.INT16, TypeDef.INT32, TypeDef.INT64};
 	public static TypeDef[] REAL_TYPES = new TypeDef[] {TypeDef.REAL32, TypeDef.REAL64};
-	
 	public static TypeDef[] MATH_TYPES = new TypeDef[] {TypeDef.INT8, TypeDef.INT16, TypeDef.INT32, TypeDef.INT64, TypeDef.REAL32, TypeDef.REAL64};
-
+	public static TypeDef[] MATH_TYPES_EXT = new TypeDef[] {TypeDef.INT8, TypeDef.INT16, TypeDef.INT32, TypeDef.INT64, TypeDef.REAL32, TypeDef.REAL64,TypeDef.INT,TypeDef.REAL,TypeDef.CHAR};
+	
+	public static String[] MATH_OPS = new String[] {"_add","_sub","_mul","_div","_mod","_pow"};
+	public static String[] BIT_OPS = new String[] {"_bit_and","_bit_or"};
+	public static String[] BOOL_OPS = new String[] {"_eq","_neq","_lt","_gt","_le","_ge","_and","_or"};
+	
 	public LibraryCore() {
 		this.name = "core";
 		
@@ -75,6 +79,39 @@ public class LibraryCore extends SourcePackage {
 		
 			iter = Iterator.libraryIterator("range", new String[] {"begin","end","step"}, new Object[] {type,type,type}, new Object[] {type});
 			this.addIterator(iter);
+		}
+		
+		for (TypeDef type : MATH_TYPES) {
+			for (String op : MATH_OPS) {
+				fn = Function.libraryFunction(type.name+"."+op, new String[] {"a1","a2"}, new Object[] {type,type}, type);
+				this.addFunction(fn);
+			}
+		}
+		
+		for (TypeDef type : MATH_TYPES) {
+			for (String op : BOOL_OPS) {
+				fn = Function.libraryFunction(type.name+"."+op, new String[] {"a1","a2"}, new Object[] {type,type}, TypeDef.BOOLEAN);
+				this.addFunction(fn);
+			}
+		}
+		
+		for (TypeDef type : INT_TYPES) {
+			for (String op : BIT_OPS) {
+				fn = Function.libraryFunction(type.name+"."+op, new String[] {"a1","a2"}, new Object[] {type,type}, type);
+				this.addFunction(fn);
+			}
+		}
+		
+		fn = Function.libraryFunction("?._concat", new String[] {"a1","a2"}, new Object[] {TypeDef.UNKNOWN,TypeDef.UNKNOWN}, TypeDef.STRING);
+		this.addFunction(fn);
+		
+		for (TypeDef type1 : MATH_TYPES_EXT) {
+			for (TypeDef type2 : MATH_TYPES_EXT) {
+				if (type1!=type2) {
+					fn = Function.libraryFunction(type1.name+"._cast", new String[] {"from","to"}, new Object[] {type1,type2}, type2);
+					this.addFunction(fn);
+				}
+			}
 		}
 	}
 }
