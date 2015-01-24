@@ -124,13 +124,19 @@ public class LibraryCore extends SourcePackage {
 		
 		for (TypeDef type : INT_TYPES) {
 			fn = Function.libraryFunction("array._getindex", new String[] {"a","i"}, new Object[] {atdt,type}, att);
+			fn.rawParams = new ArrayList<>();
+			fn.rawParams.add(new Field("T"));
 			this.addFunction(fn);
 
 			fn = Function.libraryFunction("array._setindex", new String[] {"a","v","i"}, new Object[] {atdt,att,type}, null);
+			fn.rawParams = new ArrayList<>();
+			fn.rawParams.add(new Field("T"));
 			this.addFunction(fn);
 		}
 		
 		iter = Iterator.libraryIterator("array._iter", new String[] {"a"}, new Object[] {atdt}, new Object[] {att});
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
 		this.addIterator(iter);
 		
 		fn = Function.libraryFunction("array._cast", new String[] {"a"}, new Object[] {TypeDef.LIST}, TypeDef.ARRAY);
@@ -143,13 +149,19 @@ public class LibraryCore extends SourcePackage {
 		
 		for (TypeDef type : INT_TYPES) {
 			fn = Function.libraryFunction("list._getindex", new String[] {"a","i"}, new Object[] {ltdt,type}, att);
+			fn.rawParams = new ArrayList<>();
+			fn.rawParams.add(new Field("T"));
 			this.addFunction(fn);
 
 			fn = Function.libraryFunction("list._setindex", new String[] {"a","v","i"}, new Object[] {ltdt,ltt,type}, null);
+			fn.rawParams = new ArrayList<>();
+			fn.rawParams.add(new Field("T"));
 			this.addFunction(fn);
 		}
 		
 		iter = Iterator.libraryIterator("list._iter", new String[] {"a"}, new Object[] {ltdt}, new Object[] {ltt});
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
 		this.addIterator(iter);
 		
 		fn = Function.libraryFunction("list._cast", new String[] {"a"}, new Object[] {TypeDef.ARRAY}, TypeDef.LIST);
@@ -174,5 +186,32 @@ public class LibraryCore extends SourcePackage {
 			fn = Function.libraryFunction(type.name+"._cast", new String[] {"s"}, new Object[] {TypeDef.STRING}, type);
 			this.addFunction(fn);
 		}
+		
+		fn = Function.libraryFunction("string._cast", new String[] {"s"}, new Object[] {TypeDef.UNKNOWN}, TypeDef.STRING);
+		this.addFunction(fn);
+		
+		//map functions
+		TypeDef mkt = new ParamTypeDef("K", 0); //this is K
+		TypeDef mvt = new ParamTypeDef("V", 1); //this is V
+		DataType mkvdt = new DataType(TypeDef.ARRAY); //this is map[K,V]
+		atdt.params = new DataType[] {new DataType(mkt),new DataType(mvt)};
+		
+		iter = Iterator.libraryIterator("map._iter", new String[] {"m"}, new Object[] {mkvdt}, new Object[] {mkt,mvt});
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("K"));
+		fn.rawParams.add(new Field("V"));
+		this.addIterator(iter);
+		
+		fn = Function.libraryFunction("map._getindex", new String[] {"m","i"}, new Object[] {mkvdt,mkt}, mvt);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("K"));
+		fn.rawParams.add(new Field("V"));
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("map._setindex", new String[] {"m","v","i"}, new Object[] {mkvdt, mvt, mkt}, null);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("K"));
+		fn.rawParams.add(new Field("V"));
+		this.addFunction(fn);
 	}
 }
