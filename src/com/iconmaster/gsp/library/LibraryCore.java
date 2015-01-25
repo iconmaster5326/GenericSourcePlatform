@@ -60,23 +60,16 @@ public class LibraryCore extends SourcePackage {
 		this.addFunction(fn);
 		
 		for (TypeDef type : MATH_TYPES) {
-			DataType array = new DataType(TypeDef.ARRAY);
-			array.params = new DataType[] {new DataType(type)};
-			
-			fn = Function.libraryFunction("range", new String[] {"begin","end"}, new Object[] {type,type}, array);
-			fn.getDirectives().add("pure");
-			this.addFunction(fn);
-			
-			fn = Function.libraryFunction("range", new String[] {"begin","end","step"}, new Object[] {type,type,type}, array);
-			fn.getDirectives().add("pure");
-			this.addFunction(fn);
-			
 			iter = Iterator.libraryIterator("range", new String[] {"begin","end"}, new Object[] {type,type}, new Object[] {type});
-			fn.getDirectives().add("pure");
 			this.addIterator(iter);
 		
 			iter = Iterator.libraryIterator("range", new String[] {"begin","end","step"}, new Object[] {type,type,type}, new Object[] {type});
-			fn.getDirectives().add("pure");
+			this.addIterator(iter);
+			
+			iter = Iterator.libraryIterator("revrange", new String[] {"begin","end"}, new Object[] {type,type}, new Object[] {type});
+			this.addIterator(iter);
+		
+			iter = Iterator.libraryIterator("revrange", new String[] {"begin","end","step"}, new Object[] {type,type,type}, new Object[] {type});
 			this.addIterator(iter);
 		}
 		
