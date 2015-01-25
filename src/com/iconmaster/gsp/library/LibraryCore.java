@@ -299,6 +299,16 @@ public class LibraryCore extends SourcePackage {
 		fn.rawParams.add(new Field("T"));
 		this.addIterator(iter);
 		
+		iter = Iterator.libraryIterator("array.pairs", new String[] {"a"}, new Object[] {atdt}, new Object[] {TypeDef.INT,att});
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		this.addIterator(iter);
+		
+		iter = Iterator.libraryIterator("array.revpairs", new String[] {"a"}, new Object[] {atdt}, new Object[] {TypeDef.INT,att});
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		this.addIterator(iter);
+		
 		fn = Function.libraryFunction("array._cast", new String[] {"a"}, new Object[] {TypeDef.LIST}, TypeDef.ARRAY);
 		fn.getDirectives().add("pure");
 		this.addFunction(fn);
