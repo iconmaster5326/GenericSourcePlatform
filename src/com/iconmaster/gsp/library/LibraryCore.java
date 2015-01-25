@@ -130,10 +130,27 @@ public class LibraryCore extends SourcePackage {
 		}
 		
 		//int/real type functions
-		for (TypeDef type : MATH_TYPES) {
-			f = Field.libraryField(type.name+".minValue", type);
+		for (TypeDef type : INT_TYPES) {
+			f = Field.libraryField(type.name+".MIN_VALUE", type);
 			this.addField(f);
-			f = Field.libraryField(type.name+".maxValue", type);
+			f = Field.libraryField(type.name+".MAX_VALUE", type);
+			this.addField(f);
+		}
+		
+		for (TypeDef type : REAL_TYPES) {
+			f = Field.libraryField(type.name+".MIN_VALUE", type);
+			this.addField(f);
+			f = Field.libraryField(type.name+".MAX_VALUE", type);
+			this.addField(f);
+			f = Field.libraryField(type.name+".MIN_EXP", type);
+			this.addField(f);
+			f = Field.libraryField(type.name+".MAX_EXP", type);
+			this.addField(f);
+			f = Field.libraryField(type.name+".INF", type);
+			this.addField(f);
+			f = Field.libraryField(type.name+".NEG_INF", type);
+			this.addField(f);
+			f = Field.libraryField(type.name+".NAN", type);
 			this.addField(f);
 		}
 		
