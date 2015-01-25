@@ -106,6 +106,12 @@ public class LibraryCore extends SourcePackage {
 			}
 		}
 		
+		for (TypeDef type : MATH_TYPES) {
+			fn = Function.libraryFunction(type.name+"._neg", new String[] {"a1"}, new Object[] {type}, type);
+			fn.getDirectives().add("pure");
+			this.addFunction(fn);
+		}
+		
 		fn = Function.libraryFunction("?._concat", new String[] {"a1","a2"}, new Object[] {TypeDef.UNKNOWN,TypeDef.UNKNOWN}, TypeDef.STRING);
 		fn.getDirectives().add("pure");
 		this.addFunction(fn);
