@@ -587,7 +587,67 @@ public class LibraryCore extends SourcePackage {
 		DataType mkvdt = new DataType(TypeDef.ARRAY); //this is map[K,V]
 		atdt.params = new DataType[] {new DataType(mkt),new DataType(mvt)};
 		
+		fn = Function.libraryFunction("map.size", new String[] {"m"}, new Object[] {mkvdt}, TypeDef.INT);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("K"));
+		fn.rawParams.add(new Field("V"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("map.empty", new String[] {"m"}, new Object[] {mkvdt}, TypeDef.BOOLEAN);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("K"));
+		fn.rawParams.add(new Field("V"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("map.getKey", new String[] {"m","val"}, new Object[] {mkvdt,mvt}, mkt);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("K"));
+		fn.rawParams.add(new Field("V"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("map.hasKey", new String[] {"m","key"}, new Object[] {mkvdt,mkt}, TypeDef.BOOLEAN);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("K"));
+		fn.rawParams.add(new Field("V"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("map.hasValue", new String[] {"m","val"}, new Object[] {mkvdt,mvt}, TypeDef.BOOLEAN);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("K"));
+		fn.rawParams.add(new Field("V"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("map.copy", new String[] {"m"}, new Object[] {mkvdt}, mkvdt);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("K"));
+		fn.rawParams.add(new Field("V"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("map.clear", new String[] {"m"}, new Object[] {mkvdt}, null);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("K"));
+		fn.rawParams.add(new Field("V"));
+		this.addFunction(fn);
+		
 		iter = Iterator.libraryIterator("map._iter", new String[] {"m"}, new Object[] {mkvdt}, new Object[] {mkt,mvt});
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("K"));
+		fn.rawParams.add(new Field("V"));
+		this.addIterator(iter);
+		
+		iter = Iterator.libraryIterator("map.keys", new String[] {"m"}, new Object[] {mkvdt}, new Object[] {mkt});
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("K"));
+		fn.rawParams.add(new Field("V"));
+		this.addIterator(iter);
+		
+		iter = Iterator.libraryIterator("map.values", new String[] {"m"}, new Object[] {mkvdt}, new Object[] {mvt});
 		fn.rawParams = new ArrayList<>();
 		fn.rawParams.add(new Field("K"));
 		fn.rawParams.add(new Field("V"));
