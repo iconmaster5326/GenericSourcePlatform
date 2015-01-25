@@ -159,6 +159,128 @@ public class LibraryCore extends SourcePackage {
 		DataType atdt = new DataType(TypeDef.ARRAY); //this is array[T]
 		atdt.params = new DataType[] {new DataType(att)};
 		
+		fn = Function.libraryFunction("array.size", new String[] {"a"}, new Object[] {TypeDef.ARRAY}, TypeDef.INT);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.first", new String[] {"a"}, new Object[] {atdt}, att);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.last", new String[] {"a"}, new Object[] {atdt}, att);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.concat", new String[] {"a"}, new Object[] {TypeDef.ARRAY}, TypeDef.STRING);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.concat", new String[] {"a","delin"}, new Object[] {TypeDef.ARRAY, TypeDef.STRING}, TypeDef.STRING);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.empty", new String[] {"a"}, new Object[] {TypeDef.ARRAY}, TypeDef.BOOLEAN);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.inBounds", new String[] {"a","i"}, new Object[] {TypeDef.ARRAY,TypeDef.INT}, TypeDef.BOOLEAN);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.find", new String[] {"a","item"}, new Object[] {atdt,att}, TypeDef.INT);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.find", new String[] {"a","item","b"}, new Object[] {atdt,att,TypeDef.INT}, TypeDef.INT);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.find", new String[] {"a","item","b","e"}, new Object[] {atdt,att,TypeDef.INT,TypeDef.INT}, TypeDef.INT);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.has", new String[] {"a","item"}, new Object[] {atdt,att}, TypeDef.BOOLEAN);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.has", new String[] {"a","item","b"}, new Object[] {atdt,att,TypeDef.INT}, TypeDef.BOOLEAN);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.has", new String[] {"a","item","b","e"}, new Object[] {atdt,att,TypeDef.INT,TypeDef.INT}, TypeDef.BOOLEAN);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.copy", new String[] {"a"}, new Object[] {atdt}, atdt);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.copy", new String[] {"a","b"}, new Object[] {atdt,TypeDef.INT}, atdt);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.copy", new String[] {"a","b","e"}, new Object[] {atdt,TypeDef.INT,TypeDef.INT}, atdt);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.fill", new String[] {"a","v"}, new Object[] {atdt,att}, null);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.fill", new String[] {"a","v","b"}, new Object[] {atdt,att,TypeDef.INT}, null);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.fill", new String[] {"a","v","b","e"}, new Object[] {atdt,att,TypeDef.INT,TypeDef.INT}, null);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.join", new String[] {"a1","a2"}, new Object[] {atdt,atdt}, atdt);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.replace", new String[] {"a1","a2"}, new Object[] {atdt,atdt}, null);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.replace", new String[] {"a1","a2","b"}, new Object[] {atdt,atdt,TypeDef.INT}, null);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("array.replace", new String[] {"a1","a2","b","e"}, new Object[] {atdt,atdt,TypeDef.INT,TypeDef.INT}, null);
+		fn.rawParams = new ArrayList<>();
+		fn.rawParams.add(new Field("T"));
+		this.addFunction(fn);
+		
 		for (TypeDef type : INT_TYPES) {
 			fn = Function.libraryFunction("array._getindex", new String[] {"a","i"}, new Object[] {atdt,type}, att);
 			fn.getDirectives().add("pure");
@@ -209,6 +331,10 @@ public class LibraryCore extends SourcePackage {
 		this.addFunction(fn);
 		
 		//string functions
+		fn = Function.libraryFunction("string.copy", new String[] {"s"}, new Object[] {TypeDef.STRING}, TypeDef.STRING);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
 		fn = Function.libraryFunction("string.copy", new String[] {"s","b"}, new Object[] {TypeDef.STRING,TypeDef.INT}, TypeDef.STRING);
 		fn.getDirectives().add("pure");
 		this.addFunction(fn);
@@ -229,7 +355,23 @@ public class LibraryCore extends SourcePackage {
 		fn.getDirectives().add("pure");
 		this.addFunction(fn);
 		
+		fn = Function.libraryFunction("string.find", new String[] {"s","subs","b"}, new Object[] {TypeDef.STRING,TypeDef.STRING,TypeDef.INT}, TypeDef.INT);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.find", new String[] {"s","subs","b","e"}, new Object[] {TypeDef.STRING,TypeDef.STRING,TypeDef.INT,TypeDef.INT}, TypeDef.INT);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
 		fn = Function.libraryFunction("string.has", new String[] {"s","subs"}, new Object[] {TypeDef.STRING,TypeDef.STRING}, TypeDef.BOOLEAN);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.has", new String[] {"s","subs","b"}, new Object[] {TypeDef.STRING,TypeDef.STRING,TypeDef.INT}, TypeDef.BOOLEAN);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.has", new String[] {"s","subs","b","e"}, new Object[] {TypeDef.STRING,TypeDef.STRING,TypeDef.INT,TypeDef.INT}, TypeDef.BOOLEAN);
 		fn.getDirectives().add("pure");
 		this.addFunction(fn);
 		
@@ -239,20 +381,19 @@ public class LibraryCore extends SourcePackage {
 		fn.getDirectives().add("pure");
 		this.addFunction(fn);
 		
-		fn = Function.libraryFunction("string.replace", new String[] {"s","news"}, new Object[] {TypeDef.STRING,TypeDef.STRING}, TypeDef.STRING);
-		fn.getDirectives().add("pure");
+		fn = Function.libraryFunction("string.replace", new String[] {"s","news"}, new Object[] {TypeDef.STRING,TypeDef.STRING}, null);
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.replace", new String[] {"s","news","b"}, new Object[] {TypeDef.STRING,TypeDef.STRING,TypeDef.INT}, null);
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.replace", new String[] {"s","news","b","e"}, new Object[] {TypeDef.STRING,TypeDef.STRING,TypeDef.INT,TypeDef.INT}, null);
 		this.addFunction(fn);
 		
 		fn = Function.libraryFunction("string.lower", new String[] {"s"}, new Object[] {TypeDef.STRING}, null);
 		this.addFunction(fn);
 		
 		fn = Function.libraryFunction("string.upper", new String[] {"s"}, new Object[] {TypeDef.STRING}, null);
-		this.addFunction(fn);
-		
-		DataType acdt = new DataType(TypeDef.ARRAY); //this is array[char]
-		acdt.params = new DataType[] {new DataType(TypeDef.CHAR)};
-		fn = Function.libraryFunction("string.chars", new String[] {"s"}, new Object[] {TypeDef.STRING}, acdt);
-		fn.getDirectives().add("pure");
 		this.addFunction(fn);
 		
 		for (TypeDef type : INT_TYPES) {
