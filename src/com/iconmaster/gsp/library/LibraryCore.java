@@ -233,7 +233,9 @@ public class LibraryCore extends SourcePackage {
 		fn.getDirectives().add("pure");
 		this.addFunction(fn);
 		
-		fn = Function.libraryFunction("string.split", new String[] {"s","delin"}, new Object[] {TypeDef.STRING,TypeDef.STRING}, TypeDef.LIST);
+		DataType lsdt = new DataType(TypeDef.LIST); //this is list[string]
+		atdt.params = new DataType[] {new DataType(TypeDef.STRING)};
+		fn = Function.libraryFunction("string.split", new String[] {"s","delin"}, new Object[] {TypeDef.STRING,TypeDef.STRING}, lsdt);
 		fn.getDirectives().add("pure");
 		this.addFunction(fn);
 		
@@ -247,7 +249,9 @@ public class LibraryCore extends SourcePackage {
 		fn = Function.libraryFunction("string.upper", new String[] {"s"}, new Object[] {TypeDef.STRING}, null);
 		this.addFunction(fn);
 		
-		fn = Function.libraryFunction("string.chars", new String[] {"s"}, new Object[] {TypeDef.STRING}, TypeDef.ARRAY);
+		DataType acdt = new DataType(TypeDef.ARRAY); //this is array[char]
+		atdt.params = new DataType[] {new DataType(TypeDef.CHAR)};
+		fn = Function.libraryFunction("string.chars", new String[] {"s"}, new Object[] {TypeDef.STRING}, acdt);
 		fn.getDirectives().add("pure");
 		this.addFunction(fn);
 		
