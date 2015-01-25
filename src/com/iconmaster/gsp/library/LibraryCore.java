@@ -209,6 +209,48 @@ public class LibraryCore extends SourcePackage {
 		this.addFunction(fn);
 		
 		//string functions
+		fn = Function.libraryFunction("string.copy", new String[] {"s","b"}, new Object[] {TypeDef.STRING,TypeDef.INT}, TypeDef.STRING);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.copy", new String[] {"s","b","e"}, new Object[] {TypeDef.STRING,TypeDef.INT,TypeDef.INT}, TypeDef.STRING);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.empty", new String[] {"s"}, new Object[] {TypeDef.STRING}, TypeDef.BOOLEAN);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.size", new String[] {"s"}, new Object[] {TypeDef.STRING}, TypeDef.INT);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.find", new String[] {"s","subs"}, new Object[] {TypeDef.STRING,TypeDef.STRING}, TypeDef.INT);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.has", new String[] {"s","subs"}, new Object[] {TypeDef.STRING,TypeDef.STRING}, TypeDef.BOOLEAN);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.split", new String[] {"s","delin"}, new Object[] {TypeDef.STRING,TypeDef.STRING}, TypeDef.LIST);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.replace", new String[] {"s","news"}, new Object[] {TypeDef.STRING,TypeDef.STRING}, TypeDef.STRING);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.lower", new String[] {"s"}, new Object[] {TypeDef.STRING}, null);
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.upper", new String[] {"s"}, new Object[] {TypeDef.STRING}, null);
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("string.chars", new String[] {"s"}, new Object[] {TypeDef.STRING}, TypeDef.ARRAY);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
 		for (TypeDef type : INT_TYPES) {
 			fn = Function.libraryFunction("string._getindex", new String[] {"s","i"}, new Object[] {TypeDef.STRING,type}, TypeDef.CHAR);
 			fn.getDirectives().add("pure");
