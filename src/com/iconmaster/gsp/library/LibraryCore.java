@@ -665,5 +665,30 @@ public class LibraryCore extends SourcePackage {
 		fn.rawParams.add(new Field("K"));
 		fn.rawParams.add(new Field("V"));
 		this.addFunction(fn);
+		
+		//char functions
+		fn = Function.libraryFunction("char.isDigit", new String[] {"c"}, new Object[] {TypeDef.CHAR}, TypeDef.BOOLEAN);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("char.isLetter", new String[] {"c"}, new Object[] {TypeDef.CHAR}, TypeDef.BOOLEAN);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("char.isAlphanumeric", new String[] {"c"}, new Object[] {TypeDef.CHAR}, TypeDef.BOOLEAN);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("char.isSymbol", new String[] {"c"}, new Object[] {TypeDef.CHAR}, TypeDef.BOOLEAN);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("char.isControl", new String[] {"c"}, new Object[] {TypeDef.CHAR}, TypeDef.BOOLEAN);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
+		
+		fn = Function.libraryFunction("char.isSpace", new String[] {"c"}, new Object[] {TypeDef.CHAR}, TypeDef.BOOLEAN);
+		fn.getDirectives().add("pure");
+		this.addFunction(fn);
 	}
 }
