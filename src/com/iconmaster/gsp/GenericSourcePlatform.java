@@ -2,6 +2,7 @@ package com.iconmaster.gsp;
 
 import com.iconmaster.gsp.library.GenericLibrary;
 import com.iconmaster.gsp.library.LibraryCore;
+import com.iconmaster.gsp.library.LibraryMath;
 import com.iconmaster.source.assemble.AssembledOutput;
 import com.iconmaster.source.link.Platform;
 import com.iconmaster.source.link.platform.PlatformLoader.LoadedPlatform;
@@ -19,6 +20,7 @@ public class GenericSourcePlatform extends Platform {
 		
 		//load all the default library packages:
 		this.registerLibrary(new LibraryCore());
+		this.registerLibrary(new LibraryMath());
 		
 		//load your very own libraries:
 		this.registerLibrary(new GenericLibrary());
